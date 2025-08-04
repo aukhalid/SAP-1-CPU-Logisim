@@ -8,7 +8,9 @@ Our implementation features a fully functional **hardwired control unit**, which
 
 ---
 
-* **Final Circuit:** The Final Circuit is the following circuit.
+## Final Circuit
+
+* The Final Circuit is the following circuit.
 
     ![Main Control Unit](khalid_sap1_img/khalid_sap1_main.png)
   
