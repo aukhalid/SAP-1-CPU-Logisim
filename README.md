@@ -83,6 +83,7 @@ The following Boolean equations define when each control pin is activated (goes 
 * `b_out_final = (T4 AND isADD) AND cpu_mode`
 * `alu_out_final = (T4 AND isADD) AND cpu_mode`
 * `alu_sub = 0 (Always LOW for addition)`
+* `cs_en = 1 (Always High)`
 * `sram_wr_final = ((T5 AND isSTA) AND cpu_mode) OR (sram_wr_manual AND debug)`
 * `halt = T4 AND isHLT (Used to stop the clock/reset the state counter)`
 
@@ -91,9 +92,9 @@ The following Boolean equations define when each control pin is activated (goes 
 
 ---
 
-## Machine Code Program: Addition Operation
+## Machine Code Program: Addition Operation Example
 
-This program loads two 8-bit values (51 and 25), adds them, and stores the sum (76) in memory.
+This program loads two 8-bit values (let's say 51 and 25), adds them, and stores the sum (76) in memory.
 
 * **Your ID-derived value:** Last 5 digits of 2008051 are 08051. For 8-bit, we use **51** (Decimal) = `00110011` (Binary).
 * **Current Year-derived value:** Current year 2025. For 8-bit, we use **25** (Decimal) = `00011001` (Binary).
