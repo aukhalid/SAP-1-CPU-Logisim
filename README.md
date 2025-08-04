@@ -147,12 +147,11 @@ Follow these steps to load your circuit, program the RAM, and run the automated 
 1.  **Download and Open Logisim Evolution:** If you don't have it, download [Logisim Evolution](https://github.com/logisim-evolution/logisim-evolution).
 2.  **Load the Circuit:** Open the `.circ` file containing your SAP-1 CPU design in Logisim.
 
-    ![Open Circuit](logisim_open_circuit.png)
-
 3.  **Initial Setup:**
     * Ensure the **`debug`** pin is OFF (LOW). This enables the automated control.
     * Pulse the **`pc_reset`** pin once to reset the Program Counter to `0000`.
     * Ensure the main **`clk`** (clock) component is OFF. For step-by-step testing, you'll use a manual button for the clock.
+    * Ensure the **`cs_en`** pin is ON (HIGH). This enables the circuit.
 
 4.  **Program the RAM (Debug Mode):**
     * Turn **ON** the **`debug`** pin (HIGH). This enables manual control for RAM programming and disables automatic bus drivers.
