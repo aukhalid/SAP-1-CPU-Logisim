@@ -183,25 +183,6 @@ Follow these steps to load your circuit, program the RAM, and run the automated 
 
 ---
 
-## Screenshots
-
-Please add the following screenshots to your repository:
-
-* `main_circuit.png` (Your top-level SAP-1 circuit)
-* `pc_component.png` (Screenshot of your Program Counter subcircuit)
-* `ram_component.png` (Screenshot of your RAM component, if custom)
-* `register_a_b_components.png` (Screenshot of your Register A and B subcircuits)
-* `alu_component.png` (Screenshot of your ALU subcircuit)
-* `state_counter_rc.png` (Screenshot of your State Counter/Ring Counter subcircuit)
-* `control_unit_logic.png` (Screenshot of your Control Unit's logic gates)
-* `logisim_open_circuit.png` (Screenshot of Logisim with your circuit open)
-* `ram_programming_debug_mode.png` (Screenshot showing debug mode active during RAM programming)
-* `execution_example_t1.png` (Screenshot during T1 of an instruction fetch)
-* `execution_example_alu.png` (Screenshot during ALU operation)
-* `final_result_ram.png` (Screenshot showing the final result in RAM)
-
----
-
 ## Future Enhancements (Optional)
 
 * **Expand Instruction Set:** Add more instructions like `SUB`, `OUT`, `JMP`, `JZ`, etc.
