@@ -57,45 +57,34 @@ The control unit is implemented using combinational logic (AND, OR, NOT gates) a
 
 * **State Counter (RC):** A 3-bit counter that cycles through T-states (T1, T2, T3, T4, T5, T6). Each T-state represents a distinct phase within an instruction cycle.
 
-    ![State Counter](state_counter_rc.png)
+    ![State Counter](khalid_sap1_img/khalid_sap1_rc.png)
 
 * **Opcode Decoder:** A 4-to-16 decoder connected to the most significant 4 bits (opcode) of the Instruction Register. It generates a unique HIGH signal for each recognized instruction (e.g., `isLDA`, `isADD`, `isHLT`).
 
+   ![Ins_Dec](khalid_sap1_img/khalid_sap1_ins_dec.png)
+
 * **Control Matrix (Logic Gates):** This is the network of AND and OR gates that takes the T-state signals from the State Counter and the instruction signals from the Opcode Decoder as inputs. Its outputs are the various control pins that govern data flow and operations across the CPU.
 
-    ![Control Matrix Logic](control_unit_logic.png)
+    ![Control Matrix Logic]!(khalid_sap1_img/khalid_sap1_cs.png)
 
 ### Boolean Logic for Control Pins
 
 The following Boolean equations define when each control pin is activated (goes HIGH). These are implemented directly using AND and OR gates in the Control Matrix. `cpu_mode` is `NOT(debug)`, ensuring automated operation only when `debug` is OFF.
 
-pc_out_final = T1 AND cpu_mode
-
-mar_in_en_final = (T1 AND cpu_mode) OR ((T4 AND isLDA) AND cpu_mode) OR ((T4 AND isLDB) AND cpu_mode) OR ((T4 AND isSTA) AND cpu_mode) OR (mar_in_en_manual AND debug)
-
-sram_rd_final = (T2 AND cpu_mode) OR ((T5 AND isLDA) AND cpu_mode) OR ((T5 AND isLDB) AND cpu_mode)
-
-ins_reg_in_en_final = T2 AND cpu_mode
-
-pc_en_final = T3 AND cpu_mode
-
-ins_reg_out_en_final = ((T4 AND isLDA) AND cpu_mode) OR ((T4 AND isLDB) AND cpu_mode) OR ((T4 AND isSTA) AND cpu_mode)
-
-a_in_final = ((T5 AND isLDA) AND cpu_mode) OR ((T4 AND isADD) AND cpu_mode)
-
-a_out_final = ((T4 AND isADD) AND cpu_mode) OR ((T5 AND isSTA) AND cpu_mode)
-
-b_in_final = (T5 AND isLDB) AND cpu_mode
-
-b_out_final = (T4 AND isADD) AND cpu_mode
-
-alu_out_final = (T4 AND isADD) AND cpu_mode
-
-alu_sub = 0 (Always LOW for addition)
-
-sram_wr_final = ((T5 AND isSTA) AND cpu_mode) OR (sram_wr_manual AND debug)
-
-halt_condition = T4 AND isHLT (Used to stop the clock/reset the state counter)
+* `pc_out_final = T1 AND cpu_mode`
+* `mar_in_en_final = (T1 AND cpu_mode) OR ((T4 AND isLDA) AND cpu_mode) OR ((T4 AND isLDB) AND cpu_mode) OR ((T4 AND isSTA) AND cpu_mode) OR (mar_in_en_manual AND debug)`
+* `sram_rd_final = (T2 AND cpu_mode) OR ((T5 AND isLDA) AND cpu_mode) OR ((T5 AND isLDB) AND cpu_mode)`
+* `ins_reg_in_en_final = T2 AND cpu_mode`
+* `pc_en_final = T3 AND cpu_mode`
+* `ins_reg_out_en_final = ((T4 AND isLDA) AND cpu_mode) OR ((T4 AND isLDB) AND cpu_mode) OR ((T4 AND isSTA) AND cpu_mode)`
+* `a_in_final = ((T5 AND isLDA) AND cpu_mode) OR ((T4 AND isADD) AND cpu_mode)`
+* `a_out_final = ((T4 AND isADD) AND cpu_mode) OR ((T5 AND isSTA) AND cpu_mode)`
+* `b_in_final = (T5 AND isLDB) AND cpu_mode`
+* `b_out_final = (T4 AND isADD) AND cpu_mode`
+* `alu_out_final = (T4 AND isADD) AND cpu_mode`
+* `alu_sub = 0 (Always LOW for addition)`
+* `sram_wr_final = ((T5 AND isSTA) AND cpu_mode) OR (sram_wr_manual AND debug)`
+* `halt = T4 AND isHLT (Used to stop the clock/reset the state counter)`
 
 
 **Note on Debug Mode:** When the `debug` pin is HIGH, `cpu_mode` becomes LOW, disabling all `_auto` signals. The `mar_in_en_final` and `sram_wr_final` pins are then controlled by their respective `_manual` inputs, allowing direct RAM programming. All other bus outputs (from SRAM, Reg A, Reg B, ALU) are also disabled when `debug` is HIGH to prevent bus conflicts.
