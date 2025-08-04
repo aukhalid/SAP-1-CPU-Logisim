@@ -96,13 +96,14 @@ The following Boolean equations define when each control pin is activated (goes 
 
 This program loads two 8-bit values (let's say 51 and 25), adds them, and stores the sum (76) in memory.
 
-* **Your ID-derived value:** Last 5 digits of 2008051 are 08051. For 8-bit, we use **51** (Decimal) = `00110011` (Binary).
+* **Your ID-derived value:** Last 5 digits of my student ID (2008051) are 08051. For 8-bit, we use **51** (Decimal) = `00110011` (Binary).
 * **Current Year-derived value:** Current year 2025. For 8-bit, we use **25** (Decimal) = `00011001` (Binary).
+* **Sum of these 2 numbers:** For 8-bit, we use **76** (Decimal) = `01001100` (Binary).
 
 ### Memory Addresses:
 * Value 1 (51) at: `00001101` (Decimal 13)
 * Value 2 (25) at: `00001110` (Decimal 14)
-* Sum stored at: `00001111` (Decimal 15)
+* Sum (76) stored at: `00001111` (Decimal 15)
 
 ### Instruction Set & Program:
 | Address (Binary) | Instruction (Binary) | Mnemonic & Explanation |
@@ -173,7 +174,7 @@ Follow these steps to load your circuit, program the RAM, and run the automated 
 
 6.  **Observe the `HLT` instruction:** When the CPU reaches the `HLT` instruction, the clock should stop, or the state counter should halt, indicating the program has finished.
 
-7.  **Verify Result:** Check the content of RAM address `00001111` (decimal 15). It should contain `01001000` (decimal 76).
+7.  **Verify Result:** Check the content of RAM address `00001111` (decimal 15). It should contain `01001100` (decimal 76).
 
     ![Final Result](khalid_sap1_img/khalid_sap1_result.png)
 
