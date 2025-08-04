@@ -8,35 +8,42 @@ Our implementation features a fully functional **hardwired control unit**, which
 
 ---
 
+* **Final Circuit:** The Final Circuit is the following circuit.
+
+    ![Main Control Unit](khalid_sap1_img/khalid_sap1_main.png)
+  
+
 ## SAP-1 Architecture Components
 
 The SAP-1 CPU is composed of several fundamental building blocks:
 
 * **Program Counter (PC):** A 4-bit counter that stores the memory address of the next instruction to be executed. It increments automatically after each instruction fetch.
 
-    ![Program Counter](pc_component.png)
+    ![Program Counter](khalid_sap1_img/khalid_sap1_pc.png)
 
 * **Random Access Memory (RAM):** An 8-bit wide memory unit used to store both machine code instructions and data. Our implementation uses a 16-byte RAM.
 
-    ![RAM](ram_component.png)
+    ![RAM](khalid_sap1_img/khalid_sap1_sram.png)
 
 * **Memory Address Register (MAR):** A 4-bit register that holds the address of the memory location currently being accessed (for reading or writing).
 
 * **Instruction Register (IR):** An 8-bit register that temporarily holds the instruction fetched from RAM. It's split into a 4-bit opcode and a 4-bit operand (memory address).
 
+   ![IR](khalid_sap1_img/khalid_sap1_ins_reg.png)
+
 * **Registers A & B (Accumulator & B-Register):** 8-bit general-purpose registers. Register A (Accumulator) is typically used for arithmetic operations and storing results. Register B holds the second operand for ALU operations.
 
-    ![Registers A & B](register_a_b_components.png)
+    ![Registers A & B](khalid_sap1_img/khalid_sap1_reg_gp.png)
 
 * **Arithmetic Logic Unit (ALU):** An 8-bit unit capable of performing basic arithmetic (addition, subtraction) and logical operations on data from Registers A and B.
 
-    ![ALU](alu_component.png)
+    ![ALU](khalid_sap1_img/khalid_sap1_alu.png)
 
 * **Output Register:** (Implicit in SAP-1, often just Register A or a direct output).
 
 * **Control Unit:** The "brain" of the CPU. It generates the necessary control signals (pin activations) at the correct time to sequence the micro-operations for fetching, decoding, and executing instructions. This project focuses heavily on its hardwired implementation.
 
-    ![Main Control Unit](control_unit_main.png)
+    ![Main Control Unit](khalid_sap1_img/khalid_sap1_cs.png)
 
 ---
 
