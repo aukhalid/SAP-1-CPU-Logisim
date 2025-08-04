@@ -85,7 +85,7 @@ The following Boolean equations define when each control pin is activated (goes 
 * `alu_sub = 0 (Always LOW for addition)`
 * `cs_en = 1 (Always High)`
 * `sram_wr_final = ((T5 AND isSTA) AND cpu_mode) OR (sram_wr_manual AND debug)`
-* `halt = T4 AND isHLT (Used to stop the clock/reset the state counter)`
+* `hlt = T4 AND isHLT (Used to stop the clock/reset the state counter)`
 
 
 **Note on Debug Mode:** When the `debug` pin is HIGH, `cpu_mode` becomes LOW, disabling all `_auto` signals. The `mar_in_en_final` and `sram_wr_final` pins are then controlled by their respective `_manual` inputs, allowing direct RAM programming. All other bus outputs (from SRAM, Reg A, Reg B, ALU) are also disabled when `debug` is HIGH to prevent bus conflicts.
@@ -161,7 +161,7 @@ Follow these steps to load your circuit, program the RAM, and run the automated 
         * **Set Data/Instruction:** Use the `debug_data` input to set the 8-bit instruction or data value (e.g., `00011101` for `LDA 13`).
         * **Write to RAM:** Pulse the `sram_wr_manual` button once.
 
-    ![RAM Programming](ram_programming_debug_mode.png)
+    ![RAM Programming](khalid_sap1_img/khalid_sap1_raml.png)
 
     * After loading all instructions and data, turn **OFF** the `debug` pin (LOW).
     * Pulse `pc_reset` again to ensure the PC is at `0000` for program start.
@@ -171,14 +171,11 @@ Follow these steps to load your circuit, program the RAM, and run the automated 
         * **Manual Stepping (Recommended for observation):** Repeatedly click the `clk` button. For each click, observe the changes in the PC, MAR, IR, Registers A and B, and the RAM contents. Follow the Fetch-Decode-Execute cycle for each instruction as detailed in the "How It Works" section.
         * **Continuous Run:** If you have a continuous clock source, enable it to watch the CPU run at speed.
 
-    ![Fetch Example](execution_example_t1.png)
-    ![ALU Example](execution_example_alu.png)
-
 6.  **Observe the `HLT` instruction:** When the CPU reaches the `HLT` instruction, the clock should stop, or the state counter should halt, indicating the program has finished.
 
 7.  **Verify Result:** Check the content of RAM address `00001111` (decimal 15). It should contain `01001000` (decimal 76).
 
-    ![Final Result](final_result_ram.png)
+    ![Final Result](khalid_sap1_img/khalid_sap1_result.png)
 
 ---
 
