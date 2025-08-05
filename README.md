@@ -4,7 +4,7 @@
 
 This repository contains the **Logisim Evolution** implementation of a Simple-As-Possible (SAP-1) CPU. The SAP-1 is a foundational computer architecture used to teach the basic principles of CPU design, including the data path, control unit, and instruction set architecture.
 
-Our implementation features a fully functional **hardwired control unit**, which automates the fetch-decode-execute cycle, allowing the CPU to run machine code programs autonomously. The project culminates in successfully executing a simple addition program, loading two pre-defined 8-bit values, adding them, and storing the sum in memory.
+This implementation features a fully functional **hardwired control unit**, which automates the fetch-decode-execute cycle, allowing the CPU to run machine code programs autonomously. The project culminates in successfully executing a simple addition program, loading two pre-defined 8-bit values, adding them, and storing the sum in memory.
 
 ---
 
