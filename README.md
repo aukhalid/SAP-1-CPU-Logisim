@@ -8,6 +8,10 @@ This implementation features a fully functional **hardwired control unit**, whic
 
 ---
 
+## YouTube Tutorail Video
+
+I made a video explaning everything, that you can find in this Link: https://youtu.be/PrJcHA_dC8Q
+
 ## Final Circuit
 
 * The Final Circuit is the following circuit.
