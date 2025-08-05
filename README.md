@@ -65,8 +65,6 @@ The control unit is implemented using combinational logic (AND, OR, NOT gates) a
 
 * **Control Matrix (Logic Gates):** This is the network of AND and OR gates that takes the T-state signals from the State Counter and the instruction signals from the Opcode Decoder as inputs. Its outputs are the various control pins that govern data flow and operations across the CPU.
 
-    ![Control Matrix Logic]!(khalid_sap1_img/khalid_sap1_cs.png)
-
 ### Boolean Logic for Control Pins
 
 The following Boolean equations define when each control pin is activated (goes HIGH). These are implemented directly using AND and OR gates in the Control Matrix. `cpu_mode` is `NOT(debug)`, ensuring automated operation only when `debug` is OFF.
@@ -180,7 +178,7 @@ Follow these steps to load your circuit, program the RAM, and run the automated 
 
 ---
 
-## Future Enhancements (Optional)
+## Future Enhancements
 
 * **Expand Instruction Set:** Add more instructions like `SUB`, `OUT`, `JMP`, `JZ`, etc.
 * **Microprogrammed Control:** Replace the hardwired control unit with a microprogrammed one using a ROM for greater flexibility.
