@@ -8,7 +8,7 @@ This implementation features a fully functional **hardwired control unit**, whic
 
 ---
 
-## YouTube Tutorail Video
+## YouTube Tutorail
 
 I made a video explaning everything, that you can find in this Link: https://youtu.be/PrJcHA_dC8Q
 
