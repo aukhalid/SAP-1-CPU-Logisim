@@ -2,19 +2,23 @@
 
 ## Project Overview
 
-This repository contains the **Logisim Evolution** implementation of a Simple-As-Possible (SAP-1) CPU. The SAP-1 is a foundational computer architecture used to teach the basic principles of CPU design, including the data path, control unit, and instruction set architecture.
+This repository contains the Logisim Evolution implementation of a Simple-As-Possible (SAP-1) CPU. The SAP-1 is a foundational computer architecture used to teach the basic principles of CPU design.
 
-This implementation features a fully functional **hardwired control unit**, which automates the fetch-decode-execute cycle, allowing the CPU to run machine code programs autonomously. The project culminates in successfully executing a simple addition program, loading two pre-defined 8-bit values, adding them, and storing the sum in memory.
+This enhanced implementation features a fully functional hardwired control unit, which automates the fetch-decode-execute cycle. A key improvement is the addition of a ROM-based bootloader. This new feature allows machine code programs to be loaded into the CPU's RAM automatically, eliminating the tedious and error-prone process of manual data entry. The project culminates in successfully executing a simple addition program, loading two pre-defined 8-bit values, adding them, and storing the sum in memory.
 
 ---
 
 ## YouTube Tutorail
 
-I made a video explaning everything, that you can find in this Link: https://youtu.be/PrJcHA_dC8Q
+I made a video explaning the Manual Code Loading (khalid_sap1_manual.circ): https://youtu.be/PrJcHA_dC8Q
 
 ## Final Circuit
 
-* The Final Circuit is the following circuit.
+* **The Final Circuit of the Auto Code loading:** (khalid_sap1_auto.circ)
+
+    ![Main Control Unit](khalid_sap1_img/khalid_sap1_auto.png)
+
+* **The Final Circuit of the Manual Code loading:** (khalid_sap1_manual.circ)
 
     ![Main Control Unit](khalid_sap1_img/khalid_sap1_main.png)
   
@@ -44,6 +48,10 @@ The SAP-1 CPU is composed of several fundamental building blocks:
 * **Arithmetic Logic Unit (ALU):** An 8-bit unit capable of performing basic arithmetic (addition, subtraction) and logical operations on data from Registers A and B.
 
     ![ALU](khalid_sap1_img/khalid_sap1_alu.png)
+
+* **Instruction Loader:** Load the code Instructions from ROM to RAM with clock pulses.
+
+    ![ALU](khalid_sap1_img/khalid_sap1_ins_loader.png)
 
 * **Output Register:** (Implicit in SAP-1, often just Register A or a direct output).
 
@@ -108,19 +116,19 @@ This program loads two 8-bit values (let's say 51 and 25), adds them, and stores
 * Sum (76) stored at: `00001111` (Decimal 15)
 
 ### Instruction Set & Program:
-| Address (Binary) | Instruction (Binary) | Mnemonic & Explanation |
-|------------------|----------------------|-----------------------------------------------------------|
-| `00000000`       | `0001 1101`          | `LDA 13` (Load Register A with value from memory address 13) |
-| `00000001`       | `0010 1110`          | `LDB 14` (Load Register B with value from memory address 14) |
-| `00000010`       | `0011 0000`          | `ADD` (Add B to A, store in A. Operand bits are unused) |
-| `00000011`       | `0101 1111`          | `STA 15` (Store content of Register A to memory address 15) |
-| `00000100`       | `1111 0000`          | `HLT` (Halt program execution. Operand bits are unused) |
+| Address (Binary) | Instruction (Binary) |  Hex  | Mnemonic & Explanation |
+|------------------|----------------------|-------|---------------------------------------------------|
+| `00000000`       | `0001 1101`          | `1D`  | `LDA 13` (Load Register A with value from memory address 13) |
+| `00000001`       | `0010 1110`          | `2E`  | `LDB 14` (Load Register B with value from memory address 14) |
+| `00000010`       | `0011 0000`          | `30`  | `ADD` (Add B to A, store in A. Operand bits are unused) |
+| `00000011`       | `0101 1111`          | `5F`  | `STA 15` (Store content of Register A to memory address 15) |
+| `00000100`       | `1111 0000`          | `F0`  | `HLT` (Halt program execution. Operand bits are unused) |
 
 ### Data Values in RAM:
-| Address (Binary) | Data (Binary) | Decimal |
-|------------------|---------------|---------|
-| `00001101`       | `00110011`    | 51      |
-| `00001110`       | `00011001`    | 25      |
+| Address (Binary) | Data (Binary) | Decimal | Hex
+|------------------|---------------|---------|------
+| `00001101`       | `00110011`    | 51      | 33
+| `00001110`       | `00011001`    | 25      | 19
 
 ---
 
@@ -143,7 +151,60 @@ This cycle repeats automatically for each instruction until a `HLT` instruction 
 
 ---
 
-## How to Run/Simulate the SAP-1 CPU in Logisim
+
+
+## How to Run/Simulate the SAP-1 CPU in Logisim (Auto) - (khalid_sap1_auto.circ)
+
+
+Follow these steps to load your ROM-based program and run the automated simulation:
+
+
+#### 1. Initial Setup
+
+1.  Open the `.circ` file containing your SAP-1 CPU design in Logisim.
+2.  Ensure the `debug` pin is **OFF (LOW)**.
+3.  Ensure the main `clk` (clock) component is **OFF**.
+4.  Pulse the `pc_reset` pin once to reset the Program Counter to `0000`.
+
+
+#### 2. Program the ROM
+
+1.  Right-click the ROM component and select **`Edit Contents...`**.
+2.  Enter the hex values for your program directly into the ROM's memory, as shown in the "Machine Code Program" table.
+
+#### 3. Load Program into RAM (Bootloader Mode)
+
+1.  Turn **ON** the `debug` pin (HIGH).
+2.  Pulse the main `clk` button once. This initializes the bootloader process.
+3.  With subsequent `clk` pulses, the CPU will automatically load the instructions from the ROM into the SRAM. It takes **two clock pulses per instruction/data value** to complete the write cycle.
+4.  Wait for the CPU to cycle through all necessary addresses and load all instructions and data.
+
+
+#### 4. Stop the Bootloader
+
+1.  Turn **OFF** the `debug` pin (LOW).
+2.  Pulse the main `clk` button once to ensure the bootloader process completely stops.
+
+
+#### 5. Run the Automated Program
+
+1.  Pulse the `pc_reset` pin again to ensure the Program Counter is at `0000` for program start.
+2.  Repeatedly click the `clk` button (or enable a continuous clock source) to watch the CPU execute the program automatically.
+
+
+#### 6. Verify Result
+
+1.  After the CPU executes the `HLT` instruction and stops, check the contents of RAM address `00001111` (decimal 15).
+2.  It should contain `01001100` (decimal 76).
+
+   ![Final Result](khalid_sap1_img/khalid_sap1_auto.png)
+
+
+---
+
+
+
+## How to Run/Simulate the SAP-1 CPU in Logisim (Manual) - (khalid_sap1_manual.circ)
 
 Follow these steps to load your circuit, program the RAM, and run the automated simulation:
 
@@ -181,6 +242,7 @@ Follow these steps to load your circuit, program the RAM, and run the automated 
     ![Final Result](khalid_sap1_img/khalid_sap1_result.png)
 
 ---
+
 
 ## Future Enhancements
 
