@@ -152,6 +152,9 @@ This program loads two 8-bit values (let's say 51 and 25), adds them, and stores
 | `00001101`       | `00110011`    | 51      | `33`
 | `00001110`       | `00011001`    | 25      | `19`
 
+### The Full HEX code:
+Code: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
+
 ---
 
 ## How It Works: The Fetch-Decode-Execute Cycle
@@ -194,7 +197,7 @@ Follow these steps to load your ROM-based program and run the automated simulati
 
 1.  Right-click the ROM component and select **`Edit Contents...`**.
 2.  Enter the hex values for the program directly into the ROM's memory, as shown in the "Machine Code Program" table.
-3.  The HEX code will be: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
+3.  Type the code: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
 4.  Or, you can upload the code on the ROM by downloading the file (instruction_code)
 
 #### 3. Load Program into RAM (Bootloader Mode)
