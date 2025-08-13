@@ -158,6 +158,9 @@ This cycle repeats automatically for each instruction until a `HLT` instruction 
 
 Follow these steps to load your ROM-based program and run the automated simulation:
 
+**Download and Open Logisim Evolution:** If you don't have it, download [Logisim Evolution](https://github.com/logisim-evolution/logisim-evolution).
+**Load the Circuit:** Open the `khalid_sap1_auto.circ` file containing your SAP-1 CPU design in Logisim.
+
 
 #### 1. Initial Setup
 
@@ -171,7 +174,7 @@ Follow these steps to load your ROM-based program and run the automated simulati
 
 1.  Right-click the ROM component and select **`Edit Contents...`**.
 2.  Enter the hex values for the program directly into the ROM's memory, as shown in the "Machine Code Program" table.
-3.  The HEX code will be: (1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00)
+3.  The HEX code will be: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
 4.  Or, you can upload the code on the ROM by downloading the file (instruction_code)
 
 #### 3. Load Program into RAM (Bootloader Mode)
@@ -213,7 +216,7 @@ Follow these steps to load your ROM-based program and run the automated simulati
 Follow these steps to load your circuit, program the RAM, and run the automated simulation:
 
 1.  **Download and Open Logisim Evolution:** If you don't have it, download [Logisim Evolution](https://github.com/logisim-evolution/logisim-evolution).
-2.  **Load the Circuit:** Open the `.circ` file containing your SAP-1 CPU design in Logisim.
+2.  **Load the Circuit:** Open the `khalid_sap1_manual.circ` file containing your SAP-1 CPU design in Logisim.
 
 3.  **Initial Setup:**
     * Ensure the **`debug`** pin is OFF (LOW). This enables the automated control.
