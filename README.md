@@ -57,6 +57,12 @@ The SAP-1 CPU is composed of several fundamental building blocks:
 
 * **Control Unit:** The "brain" of the CPU. It generates the necessary control signals (pin activations) at the correct time to sequence the micro-operations for fetching, decoding, and executing instructions. This project focuses heavily on its hardwired implementation.
 
+* Control Unit of the Auto Code loading: (khalid_sap1_auto.circ)
+  
+    ![Main Control Unit](khalid_sap1_img/khalid_sap1_cs1.png)
+
+* Control Unit of the Auto Code loading: (khalid_sap1_auto.circ)
+  
     ![Main Control Unit](khalid_sap1_img/khalid_sap1_cs.png)
 
 ---
@@ -77,9 +83,25 @@ The control unit is implemented using combinational logic (AND, OR, NOT gates) a
 
 * **Control Matrix (Logic Gates):** This is the network of AND and OR gates that takes the T-state signals from the State Counter and the instruction signals from the Opcode Decoder as inputs. Its outputs are the various control pins that govern data flow and operations across the CPU.
 
-### Boolean Logic for Control Pins
+### Boolean Logic for Control Pins For Auto (khalid_sap1_auto.circ)
 
 The following Boolean equations define when each control pin is activated (goes HIGH). These are implemented directly using AND and OR gates in the Control Matrix. `cpu_mode` is `NOT(debug)`, ensuring automated operation only when `debug` is OFF.
+
+* `pc_out_final = T1 AND cpu_mode AND (NOT l2)`
+* `mar_in_en_final = (T1 AND cpu_mode) OR ((T4 AND isLDA) AND cpu_mode) OR ((T4 AND isLDB) AND cpu_mode) OR ((T4 AND isSTA) AND cpu_mode) OR (l2 AND debug)`
+* `sram_rd_final = (T2 AND cpu_mode) OR ((T5 AND isLDA) AND cpu_mode) OR ((T5 AND isLDB) AND cpu_mode AND (NOT l2))`
+* `ins_reg_in_en_final = T2 AND cpu_mode AND (NOT l2)`
+* `pc_en_final = T3 AND cpu_mode AND (NOT l2)`
+* `ins_reg_out_en_final = ((T4 AND isLDA) AND cpu_mode) OR ((T4 AND isLDB) AND cpu_mode) OR ((T4 AND isSTA) AND cpu_mode AND (NOT l2))`
+* `a_in_final = ((T5 AND isLDA) AND cpu_mode) OR ((T4 AND isADD) AND cpu_mode AND (NOT l2))`
+* `a_out_final = ((T4 AND isADD) AND cpu_mode) OR ((T5 AND isSTA) AND cpu_mode AND (NOT l2))`
+* `b_in_final = (T5 AND isLDB) AND cpu_mode AND (NOT l2)`
+* `b_out_final = (T4 AND isADD) AND cpu_mode AND (NOT l2)`
+* `alu_out_final = (T4 AND isADD) AND cpu_mode AND (NOT l2)`
+* `sram_wr_final = ((T5 AND isSTA) AND (NOT l2)) OR (l2 AND debug)`
+* `hlt = T4 AND isHLT AND (NOT l2) (Used to stop the clock/reset the state counter)`
+
+### Boolean Logic for Control Pins For Manual (khalid_sap1_manual.circ)
 
 * `pc_out_final = T1 AND cpu_mode`
 * `mar_in_en_final = (T1 AND cpu_mode) OR ((T4 AND isLDA) AND cpu_mode) OR ((T4 AND isLDB) AND cpu_mode) OR ((T4 AND isSTA) AND cpu_mode) OR (mar_in_en_manual AND debug)`
@@ -127,8 +149,8 @@ This program loads two 8-bit values (let's say 51 and 25), adds them, and stores
 ### Data Values in RAM:
 | Address (Binary) | Data (Binary) | Decimal | Hex
 |------------------|---------------|---------|------
-| `00001101`       | `00110011`    | 51      | 33
-| `00001110`       | `00011001`    | 25      | 19
+| `00001101`       | `00110011`    | 51      | `33`
+| `00001110`       | `00011001`    | 25      | `19`
 
 ---
 
@@ -193,7 +215,7 @@ Follow these steps to load your ROM-based program and run the automated simulati
 
 1.  Pulse the `pc_reset` pin again to ensure the Program Counter is at `0000` for program start.
 2.  Repeatedly click the `clk` button (or enable a continuous clock source) to watch the CPU execute the program automatically.
-3.  For each click, observe the changes in the PC, MAR, IR, Registers A and B, and the RAM contents in the 7 Segment Display.
+3.  For each click, observe the changes in the PC, MAR, IR, Registers A and B contents in the 7 Segment Display.
 4.  Follow the Fetch-Decode-Execute cycle for each instruction as detailed in the "How It Works" section.
 5.  If you have a continuous clock source, enable it to watch the CPU run at speed.
 
@@ -201,7 +223,7 @@ Follow these steps to load your ROM-based program and run the automated simulati
 #### 6. Verify Result
 
 1.  After the CPU executes the `HLT` instruction and stops, check the contents of RAM address `00001111` (decimal 15).
-2.  It should contain `01001100` (decimal 76).
+2.  It should contain `01001100` (decimal 76, Hex 4C). The Reg A should also contain the Hex value 4C in the 7 Segment Display.
 
    ![Final Result](khalid_sap1_img/khalid_sap1_auto2.png)
 
