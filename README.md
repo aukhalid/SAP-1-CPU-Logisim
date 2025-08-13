@@ -168,6 +168,7 @@ This program loads two 8-bit values (let's say 51 and 25), adds them, and stores
 | `00000000` | `0001 1101` | `1D` | `LDA 13` (Load Register A with value from memory address 13) |
 | `00000001` | `0010 1110` | `2E` | `LDB 14` (Load Register B with value from memory address 14) |
 | `00000010` | `0011 0000` | `30` | `ADD` (Add B to A, store in A. Operand bits are unused) |
+| `00000010` | `0100 0000` | `40` | `SUB` (Sub A to B, store in A. Operand bits are unused) |
 | `00000011` | `0101 1111` | `5F` | `STA 15` (Store content of Register A to memory address 15) |
 | `00000100` | `1111 0000` | `F0` | `HLT` (Halt program execution. Operand bits are unused) |
 
@@ -178,7 +179,9 @@ This program loads two 8-bit values (let's say 51 and 25), adds them, and stores
 | `00001110` | `00011001` | 25 | `19` |
 
 ### Full HEX Code
-**`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
+For ADD: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
+
+For SUB: **`1D 2E 40 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
 
 ---
 
@@ -218,8 +221,8 @@ Follow these steps to load your ROM-based program and run the automated simulati
 ### 2) Program the ROM
 1. Right-click the ROM component and select **`Edit Contents...`**.  
 2. Enter the hex values for the program directly into the ROM's memory, as shown in the "Example Program" section.  
-3. Type the code: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**  
-4. Or, you can upload the code to the ROM by loading the provided `instruction_code` file.
+3. Type the code: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`** (For ADD) or **`1D 2E 40 5F F0 00 00 00 00 00 00 00 00 33 19 00`** (For SUB)
+4. Or, you can upload the code to the ROM by loading the provided `instruction_code_add` or `instruction_code_sub` file.
 
 ### 3) Load Program to RAM (Bootloader Mode)
 1. Turn **ON** the `debug` pin (HIGH). The Code Loading Mode LED will turn ON.  
@@ -244,7 +247,7 @@ Follow these steps to load your ROM-based program and run the automated simulati
 
 ### 6) Verify Result
 1. After the CPU executes the `HLT` instruction and stops, check the contents of RAM address `00001111` (decimal 15).  
-2. It should contain `01001100` (decimal 76, Hex `4C`). Register A should also show `4C` on the 7-segment display.
+2. If you do ADD then It should contain `01001100` (decimal 76, Hex `4C`). Register A should also show `4C` on the 7-segment display.
    
    ![Verify Result](khalid_sap1_img/khalid_sap1_auto2.png)
 
