@@ -132,14 +132,10 @@ The following Boolean equations define when each control pin is activated (goes 
 
 This program loads two 8-bit values (let's say 51 and 25), adds them, and stores the sum (76) in memory.
 
-* **Your ID-derived value:** Last 5 digits of my student ID (2008051) are 08051. For 8-bit, we use **51** (Decimal) = `00110011` (Binary).
-* **Current Year-derived value:** Current year 2025. For 8-bit, we use **25** (Decimal) = `00011001` (Binary).
-* **Sum of these 2 numbers:** For 8-bit, we use **76** (Decimal) = `01001100` (Binary).
-
 ### Memory Addresses:
-* Value 1 (51) at: `00001101` (Decimal 13)
-* Value 2 (25) at: `00001110` (Decimal 14)
-* Sum (76) stored at: `00001111` (Decimal 15)
+* Value 1 (51) at: `00001101` (Decimal 13 & Hex 33)
+* Value 2 (25) at: `00001110` (Decimal 14 & Hex 19)
+* Sum (76) stored at: `00001111` (Decimal 15 & Hex 4C)
 
 ### Instruction Set & Program:
 | Address (Binary) | Instruction (Binary) |  Hex  | Mnemonic & Explanation |
@@ -234,7 +230,7 @@ Follow these steps to load your ROM-based program and run the automated simulati
 #### 6. Verify Result
 
 1.  After the CPU executes the `HLT` instruction and stops, check the contents of RAM address `00001111` (decimal 15).
-2.  It should contain `01001100` (decimal 76, Hex 4C). The Reg A should also contain the Hex value 4C in the 7 Segment Display.
+2.  It should contain `01001100` (decimal 76, Hex 4C). The Reg A should also contain the Hex value `4C` in the 7 Segment Display.
 
    ![Verify Result](khalid_sap1_img/khalid_sap1_auto2.png)
 
