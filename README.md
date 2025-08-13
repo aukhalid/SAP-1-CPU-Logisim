@@ -1,6 +1,7 @@
 # SAP-1 CPU (Simple-As-Possible) — Logisim Evolution
 
 ## Table of Contents
+Click on the `Table of Contents` below to directly go the contents
 - [Project Overview](#overview)
 - [Video Tutorials](#video-tutorials)
 - [Final Circuits](#final-circuits)
