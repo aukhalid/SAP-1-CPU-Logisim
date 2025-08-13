@@ -36,10 +36,12 @@ I made videos explaining the SAP-1 CPU and how to simulate it.
 <a id="final-circuits"></a>
 ## Final Circuits
 
-- **Auto Code Loading (`khalid_sap1_auto.circ`)**  
+- **Auto Code Loading (`khalid_sap1_auto.circ`)**
+  
   ![Main Control Unit](khalid_sap1_img/khalid_sap1_auto1.png)
 
-- **Manual Code Loading (`khalid_sap1_manual.circ`)**  
+- **Manual Code Loading (`khalid_sap1_manual.circ`)**
+   
   ![Main Control Unit](khalid_sap1_img/khalid_sap1_main.png)
 
 ---
@@ -49,34 +51,42 @@ I made videos explaining the SAP-1 CPU and how to simulate it.
 
 The SAP-1 CPU is composed of several fundamental building blocks:
 
-- **Program Counter (PC):** A 4-bit counter that stores the memory address of the next instruction to be executed. It increments automatically after each instruction fetch.  
+- **Program Counter (PC):** A 4-bit counter that stores the memory address of the next instruction to be executed. It increments automatically after each instruction fetch.
+  
   ![Program Counter](khalid_sap1_img/khalid_sap1_pc.png)
 
-- **Random Access Memory (RAM):** An 8-bit wide memory unit used to store both machine code instructions and data. This implementation uses a 16-byte RAM.  
+- **Random Access Memory (RAM):** An 8-bit wide memory unit used to store both machine code instructions and data. This implementation uses a 16-byte RAM.
+   
   ![RAM](khalid_sap1_img/khalid_sap1_sram.png)
 
 - **Memory Address Register (MAR):** A 4-bit register that holds the address of the memory location currently being accessed (for reading or writing).
 
-- **Instruction Register (IR):** An 8-bit register that temporarily holds the instruction fetched from RAM. It's split into a 4-bit opcode and a 4-bit operand (memory address).  
+- **Instruction Register (IR):** An 8-bit register that temporarily holds the instruction fetched from RAM. It's split into a 4-bit opcode and a 4-bit operand (memory address).
+    
   ![IR](khalid_sap1_img/khalid_sap1_ins_reg.png)
 
-- **Registers A & B (Accumulator & B-Register):** 8-bit general-purpose registers. Register A (Accumulator) is typically used for arithmetic operations and storing results. Register B holds the second operand for ALU operations.  
+- **Registers A & B (Accumulator & B-Register):** 8-bit general-purpose registers. Register A (Accumulator) is typically used for arithmetic operations and storing results. Register B holds the second operand for ALU operations.
+  
   ![Registers A & B](khalid_sap1_img/khalid_sap1_reg_gp.png)
 
-- **Arithmetic Logic Unit (ALU):** An 8-bit unit capable of performing basic arithmetic (addition, subtraction) and logical operations on data from Registers A and B.  
+- **Arithmetic Logic Unit (ALU):** An 8-bit unit capable of performing basic arithmetic (addition, subtraction) and logical operations on data from Registers A and B.
+  
   ![ALU](khalid_sap1_img/khalid_sap1_alu.png)
 
-- **Instruction Loader:** Loads code instructions from ROM to RAM with clock pulses.  
+- **Instruction Loader:** Loads code instructions from ROM to RAM with clock pulses.
+  
   ![Instruction Loader](khalid_sap1_img/khalid_sap1_ins_loader1.png)
 
 - **Output Register:** (Implicit in SAP-1, often just Register A or a direct output).
 
 - **Control Unit:** The "brain" of the CPU. It generates the necessary control signals (pin activations) at the correct time to sequence the micro-operations for fetching, decoding, and executing instructions.
 
-  - **Control Unit — Auto Mode (overview)**  
+  - **Control Unit — Auto Mode (overview)**
+    
     ![Main Control Unit](khalid_sap1_img/khalid_sap1_cs1.png)
   
-  - **Control Unit — Auto Mode (detail)**  
+  - **Control Unit — Auto Mode (detail)**
+    
     ![Main Control Unit](khalid_sap1_img/khalid_sap1_cs.png)
 
 ---
@@ -89,10 +99,12 @@ The control unit is implemented using combinational logic (AND, OR, NOT gates) a
 <a id="subcomponents"></a>
 ### Subcomponents
 
-- **State Counter (RC):** A 3-bit counter that cycles through T-states (T1, T2, T3, T4, T5, T6).  
+- **State Counter (RC):** A 3-bit counter that cycles through T-states (T1, T2, T3, T4, T5, T6).
+  
   ![State Counter](khalid_sap1_img/khalid_sap1_rc.png)
 
-- **Opcode Decoder:** A 4-to-16 decoder connected to the most significant 4 bits (opcode) of the Instruction Register. It generates a unique HIGH signal for each recognized instruction (e.g., `isLDA`, `isADD`, `isHLT`).  
+- **Opcode Decoder:** A 4-to-16 decoder connected to the most significant 4 bits (opcode) of the Instruction Register. It generates a unique HIGH signal for each recognized instruction (e.g., `isLDA`, `isADD`, `isHLT`).
+  
   ![Instruction Decoder](khalid_sap1_img/khalid_sap1_ins_dec.png)
 
 - **Control Matrix (Logic Gates):** The network of AND and OR gates that takes the T-state signals from the State Counter and the instruction signals from the Opcode Decoder as inputs. Its outputs are the various control pins that govern data flow and operations across the CPU.
@@ -140,7 +152,7 @@ The following Boolean equations define when each control pin is activated (goes 
 ---
 
 <a id="example-program"></a>
-## Example Program: Addition
+## Machine Code Program: Addition
 
 This program loads two 8-bit values (let's say 51 and 25), adds them, and stores the sum (76) in memory.
 
@@ -164,13 +176,13 @@ This program loads two 8-bit values (let's say 51 and 25), adds them, and stores
 | `00001101` | `00110011` | 51 | `33` |
 | `00001110` | `00011001` | 25 | `19` |
 
-### Full HEX Listing
+### Full HEX Code
 **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
 
 ---
 
 <a id="fde"></a>
-## Fetch–Decode–Execute Cycle
+## How It Works: Fetch–Decode–Execute Cycle
 
 The CPU operates in a continuous cycle, driven by the clock:
 
@@ -226,11 +238,13 @@ Follow these steps to load your ROM-based program and run the automated simulati
 5. If you have a continuous clock source, enable it to watch the CPU run at speed.
 
 **You can follow the video below:**  
+
 ![Final Result](khalid_sap1_img/khalid_sap1_vid.gif)
 
 ### 6) Verify Result
 1. After the CPU executes the `HLT` instruction and stops, check the contents of RAM address `00001111` (decimal 15).  
-2. It should contain `01001100` (decimal 76, Hex `4C`). Register A should also show `4C` on the 7-segment display.  
+2. It should contain `01001100` (decimal 76, Hex `4C`). Register A should also show `4C` on the 7-segment display.
+   
    ![Verify Result](khalid_sap1_img/khalid_sap1_auto2.png)
 
 ---
@@ -269,7 +283,8 @@ Follow these steps to load your circuit, program the RAM, and run the automated 
 
 6. **Observe `HLT`:** When the CPU reaches `HLT`, the clock should stop, or the state counter should halt, indicating the program has finished.
 
-7. **Verify Result:** Check RAM address `00001111` (decimal 15). It should contain `01001100` (decimal 76).  
+7. **Verify Result:** Check RAM address `00001111` (decimal 15). It should contain `01001100` (decimal 76).
+   
    ![Final Result](khalid_sap1_img/khalid_sap1_result.png)
 
 ---
