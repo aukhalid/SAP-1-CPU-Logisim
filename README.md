@@ -10,7 +10,11 @@ This enhanced implementation features a fully functional hardwired control unit,
 
 ## YouTube Tutorail
 
-I made a video explaning the Manual Code Loading (khalid_sap1_manual.circ): https://youtu.be/PrJcHA_dC8Q
+I made videos explaning the SAP-1 CPU, how to simulate it.
+
+Auto Code Loading (khalid_sap1_auto.circ): https://youtu.be/vwInhCTQctg
+
+Manual Code Loading (khalid_sap1_manual.circ): https://youtu.be/PrJcHA_dC8Q
 
 ## Final Circuit
 
@@ -222,13 +226,17 @@ Follow these steps to load your ROM-based program and run the automated simulati
 4.  Follow the Fetch-Decode-Execute cycle for each instruction as detailed in the "How It Works" section.
 5.  If you have a continuous clock source, enable it to watch the CPU run at speed.
 
+**You can Follow the Video below:**
+
+   ![Final Result](khalid_sap1_img/khalid_sap1_vid.gif)
+
 
 #### 6. Verify Result
 
 1.  After the CPU executes the `HLT` instruction and stops, check the contents of RAM address `00001111` (decimal 15).
 2.  It should contain `01001100` (decimal 76, Hex 4C). The Reg A should also contain the Hex value 4C in the 7 Segment Display.
 
-   ![Final Result](khalid_sap1_img/khalid_sap1_auto2.png)
+   ![Verify Result](khalid_sap1_img/khalid_sap1_auto2.png)
 
 
 ---
