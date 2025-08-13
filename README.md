@@ -133,9 +133,9 @@ The following Boolean equations define when each control pin is activated (goes 
 This program loads two 8-bit values (let's say 51 and 25), adds them, and stores the sum (76) in memory.
 
 ### Memory Addresses:
-* Value 1 (51) at: `00001101` (Decimal 13 & Hex 33)
-* Value 2 (25) at: `00001110` (Decimal 14 & Hex 19)
-* Sum (76) stored at: `00001111` (Decimal 15 & Hex 4C)
+* Value 1 (Dec 51  & Hex `33`) at: `00001101` (Decimal 13)
+* Value 2 (Dec 25  & Hex `19`) at: `00001110` (Decimal 14)
+* Sum (Dec 76  & Hex `4C`) stored at: `00001111` (Decimal 15)
 
 ### Instruction Set & Program:
 | Address (Binary) | Instruction (Binary) |  Hex  | Mnemonic & Explanation |
@@ -152,7 +152,7 @@ This program loads two 8-bit values (let's say 51 and 25), adds them, and stores
 | `00001101`       | `00110011`    | 51      | `33`
 | `00001110`       | `00011001`    | 25      | `19`
 
-### The Full HEX code:
+### The Full HEX Instruction Code:
 Code: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
 
 ---
