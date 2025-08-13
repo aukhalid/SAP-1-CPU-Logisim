@@ -51,7 +51,7 @@ The SAP-1 CPU is composed of several fundamental building blocks:
 
 * **Instruction Loader:** Load the code Instructions from ROM to RAM with clock pulses.
 
-    ![ALU](khalid_sap1_img/khalid_sap1_ins_loader.png)
+    ![ALU](khalid_sap1_img/khalid_sap1_ins_loader1.png)
 
 * **Output Register:** (Implicit in SAP-1, often just Register A or a direct output).
 
@@ -201,7 +201,7 @@ Follow these steps to load your ROM-based program and run the automated simulati
 1.  After the CPU executes the `HLT` instruction and stops, check the contents of RAM address `00001111` (decimal 15).
 2.  It should contain `01001100` (decimal 76).
 
-   ![Final Result](khalid_sap1_img/khalid_sap1_auto.png)
+   ![Final Result](khalid_sap1_img/khalid_sap1_auto2.png)
 
 
 ---
