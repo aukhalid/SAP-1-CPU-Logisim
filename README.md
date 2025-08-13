@@ -16,7 +16,7 @@ I made a video explaning the Manual Code Loading (khalid_sap1_manual.circ): http
 
 * **The Final Circuit of the Auto Code loading:** (khalid_sap1_auto.circ)
 
-    ![Main Control Unit](khalid_sap1_img/khalid_sap1_auto.png)
+    ![Main Control Unit](khalid_sap1_img/khalid_sap1_auto1.png)
 
 * **The Final Circuit of the Manual Code loading:** (khalid_sap1_manual.circ)
 
@@ -170,14 +170,15 @@ Follow these steps to load your ROM-based program and run the automated simulati
 #### 2. Program the ROM
 
 1.  Right-click the ROM component and select **`Edit Contents...`**.
-2.  Enter the hex values for your program directly into the ROM's memory, as shown in the "Machine Code Program" table.
+2.  Enter the hex values for the program directly into the ROM's memory, as shown in the "Machine Code Program" table.
+3.  The HEX code will be: (1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00)
+4.  Or, you can upload the code on the ROM by downloading the file (instruction_code)
 
 #### 3. Load Program into RAM (Bootloader Mode)
 
 1.  Turn **ON** the `debug` pin (HIGH).
-2.  Pulse the main `clk` button once. This initializes the bootloader process.
-3.  With subsequent `clk` pulses, the CPU will automatically load the instructions from the ROM into the SRAM. It takes **two clock pulses per instruction/data value** to complete the write cycle.
-4.  Wait for the CPU to cycle through all necessary addresses and load all instructions and data.
+2.  With subsequent `clk` pulses, the CPU will automatically load the instructions from the ROM into the SRAM. It takes **two clock pulses per instruction/data value** to complete the write cycle.
+3.  Wait for the CPU to cycle through all necessary addresses and load all instructions and data.
 
 
 #### 4. Stop the Bootloader
@@ -190,6 +191,9 @@ Follow these steps to load your ROM-based program and run the automated simulati
 
 1.  Pulse the `pc_reset` pin again to ensure the Program Counter is at `0000` for program start.
 2.  Repeatedly click the `clk` button (or enable a continuous clock source) to watch the CPU execute the program automatically.
+3.  For each click, observe the changes in the PC, MAR, IR, Registers A and B, and the RAM contents.
+4.  Follow the Fetch-Decode-Execute cycle for each instruction as detailed in the "How It Works" section.
+5.  If you have a continuous clock source, enable it to watch the CPU run at speed.
 
 
 #### 6. Verify Result
