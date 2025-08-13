@@ -159,12 +159,10 @@ This cycle repeats automatically for each instruction until a `HLT` instruction 
 Follow these steps to load your ROM-based program and run the automated simulation:
 
 **Download and Open Logisim Evolution:** If you don't have it, download [Logisim Evolution](https://github.com/logisim-evolution/logisim-evolution).
-**Load the Circuit:** Open the `khalid_sap1_auto.circ` file containing your SAP-1 CPU design in Logisim.
-
 
 #### 1. Initial Setup
 
-1.  Open the `.circ` file containing your SAP-1 CPU design in Logisim.
+1.  Open the `khalid_sap1_auto.circ` file containing your SAP-1 CPU design in Logisim.
 2.  Ensure the `debug` pin is **OFF (LOW)**.
 3.  Ensure the main `clk` (clock) component is **OFF**.
 4.  Pulse the `pc_reset` pin once to reset the Program Counter to `0000`.
@@ -179,9 +177,10 @@ Follow these steps to load your ROM-based program and run the automated simulati
 
 #### 3. Load Program into RAM (Bootloader Mode)
 
-1.  Turn **ON** the `debug` pin (HIGH).
+1.  Turn **ON** the `debug` pin (HIGH). The Code Loading Mode LED will turn ON.
 2.  With subsequent `clk` pulses, the CPU will automatically load the instructions from the ROM into the SRAM. It takes **two clock pulses per instruction/data value** to complete the write cycle.
 3.  Wait for the CPU to cycle through all necessary addresses and load all instructions and data.
+4.  You can see the MAR Adress and the Data Bus in the 7 Segment Display.
 
 
 #### 4. Stop the Bootloader
@@ -194,7 +193,7 @@ Follow these steps to load your ROM-based program and run the automated simulati
 
 1.  Pulse the `pc_reset` pin again to ensure the Program Counter is at `0000` for program start.
 2.  Repeatedly click the `clk` button (or enable a continuous clock source) to watch the CPU execute the program automatically.
-3.  For each click, observe the changes in the PC, MAR, IR, Registers A and B, and the RAM contents.
+3.  For each click, observe the changes in the PC, MAR, IR, Registers A and B, and the RAM contents in the 7 Segment Display.
 4.  Follow the Fetch-Decode-Execute cycle for each instruction as detailed in the "How It Works" section.
 5.  If you have a continuous clock source, enable it to watch the CPU run at speed.
 
