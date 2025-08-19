@@ -8,6 +8,7 @@ Click on the `Table of Contents` below to directly go the contents
 - [Architecture Components](#architecture-components)
 - [Control Unit (Hardwired)](#control-unit)
 - [Instruction Set & Example](#example-program)
+- [Assembler or Compiler](#compiler)
 - [Fetch–Decode–Execute Cycle](#fde)
 - [Run the CPU — Auto Mode](#run-auto)
 - [Run the CPU — Manual Mode](#run-manual)
@@ -182,6 +183,15 @@ This program loads two 8-bit values (let's say 51 and 25), adds them, and stores
 For ADD: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
 
 For SUB: **`1D 2E 40 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
+
+---
+
+<a id="#compiler"></a>
+## Assembler or Compiler
+
+Write your SAP-1 assembly code below. The assembler will convert it into a hex string for your Logisim ROM.
+
+Compiler Link: [sap1-compiler.vercel.app](https://sap1-compiler.vercel.app)
 
 ---
 
