@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAP-1 Assembler</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Enable dark mode class
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center p-4 transition-colors duration-300"
+  >
+    <div
+      class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl p-8 rounded-2xl shadow-2xl w-full max-w-2xl transition-colors duration-300"
+    >
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-6">
+        <h1
+          class="text-3xl font-bold text-gray-800 dark:text-gray-100 transition-colors"
+        >
+          SAP-1 Assembler
+        </h1>
+        <button
+          onclick="toggleDarkMode()"
+          class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:scale-110 transition-transform"
+          title="Toggle Dark Mode"
+        >
+          🌙
+        </button>
+      </div>
+
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-8">
+        Write your SAP-1 assembly code below. The assembler will convert it into
+        a hex string for your Logisim ROM.
+      </p>
+
+      <!-- Input Section -->
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">
+          Assembly Code
+        </h2>
+        <textarea
+          id="assemblyInput"
+          rows="10"
+          class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200 resize-none bg-gray-50 dark:bg-gray-900 dark:text-gray-100"
+          placeholder="e.g.&#10;LDA 13&#10;LDB 14&#10;ADD&#10;STA 15&#10;HLT&#10;ORG 13&#10;DEC 51&#10;DEC 25"
+        ></textarea>
+        <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          Supported commands: <b>LDA, LDB, ADD, SUB, STA, HLT</b>. Use
+          <code>ORG [address]</code> to set the origin, <code>DEC [value]</code>
+          for decimal data.
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 mb-6">
+        <button
+          onclick="assemble()"
+          class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg shadow-md transition-transform transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          Assemble to Hex
+        </button>
+        <button
+          onclick="copyToClipboard()"
+          id="copyButton"
+          class="flex-1 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 font-bold py-3 rounded-lg shadow-md transition-transform transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-400"
+        >
+          Copy to Clipboard
+        </button>
+      </div>
+
+      <!-- Output -->
+      <div>
+        <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">
+          Generated Hex Code
+        </h2>
+        <div
+          id="outputContainer"
+          class="p-4 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg overflow-x-auto text-gray-800 dark:text-gray-100 font-mono"
+        >
+          <span id="hexOutput" class="whitespace-nowrap"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div
+      id="toast"
+      class="fixed bottom-6 right-6 bg-green-600 text-white py-2 px-4 rounded-lg shadow-lg opacity-0 pointer-events-none transition-opacity duration-500"
+    >
+      ✅ Copied to clipboard!
+    </div>
+
+    <script>
+      // Dark mode toggle with localStorage
+      function toggleDarkMode() {
+        const html = document.documentElement;
+        if (html.classList.contains("dark")) {
+          html.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+        } else {
+          html.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+        }
+      }
+
+      // Load theme on page load
+      (function () {
+        if (localStorage.getItem("theme") === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+
+      // The core logic of the assembler.
+      function assemble() {
+        const assemblyCode = document.getElementById("assemblyInput").value;
+        const outputElement = document.getElementById("hexOutput");
+        const lines = assemblyCode.trim().split("\n");
+
+        // Define the opcodes for the SAP-1 instruction set.
+        const opcodes = {
+          LDA: "1", // 0001
+          LDB: "2", // 0010
+          ADD: "3", // 0011
+          SUB: "4", // 0100
+          STA: "5", // 0101
+          HLT: "F", // 1111
+        };
+
+        const hexProgram = [];
+        let currentAddress = 0;
+
+        for (const line of lines) {
+          if (line.trim() === "" || line.trim().startsWith("//")) {
+            continue;
+          }
+
+          const parts = line.trim().toUpperCase().split(/\s+/);
+          const command = parts[0];
+          const operand = parts.length > 1 ? parts[1] : null;
+
+          if (command === "ORG") {
+            currentAddress = parseInt(operand, 10);
+          } else if (command === "DEC") {
+            const decimalValue = parseInt(operand, 10);
+            const hexValue = decimalValue
+              .toString(16)
+              .padStart(2, "0")
+              .toUpperCase();
+            while (hexProgram.length < currentAddress) {
+              hexProgram.push("00");
+            }
+            hexProgram.push(hexValue);
+            currentAddress++;
+          } else if (opcodes.hasOwnProperty(command)) {
+            let opcodeHex = opcodes[command];
+            let operandHex = "0";
+
+            if (operand) {
+              operandHex = parseInt(operand, 10).toString(16).toUpperCase();
+            }
+
+            const instructionHex = (opcodeHex + operandHex).padStart(2, "0");
+
+            while (hexProgram.length < currentAddress) {
+              hexProgram.push("00");
+            }
+            hexProgram.push(instructionHex);
+            currentAddress++;
+          } else {
+            alert(
+              `Error: Unrecognized command or invalid format on line: ${line}`
+            );
+            outputElement.textContent =
+              "Error during assembly. Please check your code.";
+            return;
+          }
+        }
+
+        while (hexProgram.length < 16) {
+          hexProgram.push("00");
+        }
+
+        const finalHex = hexProgram.join(" ");
+        outputElement.textContent = finalHex;
+      }
+
+      // Handles copying the generated hex code to the clipboard.
+      function copyToClipboard() {
+        const outputText = document.getElementById("hexOutput").textContent;
+        if (outputText) {
+          navigator.clipboard.writeText(outputText).then(() => {
+            showToast();
+          });
+        }
+      }
+
+      // Show success toast
+      function showToast() {
+        const toast = document.getElementById("toast");
+        toast.classList.remove("opacity-0");
+        toast.classList.add("opacity-100");
+        setTimeout(() => {
+          toast.classList.remove("opacity-100");
+          toast.classList.add("opacity-0");
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>
