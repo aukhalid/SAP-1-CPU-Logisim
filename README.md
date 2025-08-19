@@ -189,9 +189,9 @@ For SUB: **`1D 2E 40 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
 <a id="compiler"></a>
 ## Assembler or Compiler
 
-Write your SAP-1 assembly code and The assembler will convert it into a hex string for your Logisim ROM.
+Go to the link and write your SAP-1 assembly code and The assembler will convert it into a hex string for your Logisim ROM.
 
-Compiler Link: [sap1-compiler.vercel.app](https://sap1-compiler.vercel.app)
+**Compiler Link:** [sap1-compiler.vercel.app](https://sap1-compiler.vercel.app)
 
 ---
 
