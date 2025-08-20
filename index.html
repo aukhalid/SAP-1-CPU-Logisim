@@ -54,10 +54,10 @@
           id="assemblyInput"
           rows="10"
           class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200 resize-none bg-gray-50 dark:bg-gray-900 dark:text-gray-100"
-          placeholder="e.g.&#10;LDA 13&#10;LDB 14&#10;ADD&#10;STA 15&#10;HLT&#10;ORG 13&#10;DEC 51&#10;DEC 25"
+          placeholder="e.g.&#10;LDA 13&#10;LDB 14&#10;ADD&#10;STA 15&#10;JMP 0&#10;HLT&#10;ORG 13&#10;DEC 51&#10;DEC 25"
         ></textarea>
         <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Supported commands: <b>LDA, LDB, ADD, SUB, STA, HLT</b>. Use
+          Supported commands: <b>LDA, LDB, ADD, SUB, STA, JMP, HLT</b>. Use
           <code>ORG [address]</code> to set the origin, <code>DEC [value]</code>
           for decimal data.
         </div>
@@ -135,6 +135,7 @@
           ADD: "3", // 0011
           SUB: "4", // 0100
           STA: "5", // 0101
+          JMP: "6", // 0110
           HLT: "F", // 1111
         };
 
@@ -219,4 +220,3 @@
     </script>
   </body>
 </html>
-
