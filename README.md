@@ -171,7 +171,7 @@ This program loads two 8-bit values (let's say 51 and 25), adds them, and stores
 | `00000010` | `0011 0000` | `30` | `ADD` (Add B to A, store in A. Operand bits are unused) |
 | `00000010` | `0100 0000` | `40` | `SUB` (Sub A to B, store in A. Operand bits are unused) |
 | `00000011` | `0101 1111` | `5F` | `STA 15` (Store content of Register A to memory address 15) |
-| `00000100` | `0110 0101` | `65` | `STA 15` (Store content of Register A to memory address 15) |
+| `00000100` | `0110 0101` | `65` | `STA 15` (Jump to memory address 5) |
 | `00000101` | `1111 0000` | `F0` | `HLT` (Halt program execution. Operand bits are unused) |
 
 ### Data Values in RAM
@@ -189,10 +189,15 @@ Go to the link and write your SAP-1 assembly code and The assembler will convert
 
 **Compiler Link:** [sap1-compiler.vercel.app](https://sap1-compiler.vercel.app)
 
-Example HEX Code
-For ADD: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
+**Example:**
 
-For JMP & ADD: **`1D 2E 65 00 00 30 5F F0 00 00 00 00 00 33 19 00`**
+Assembly Code For ADD: **`(LDA 13 LDA 14 ADD STA 15 HLT ORG 13 DEC 51 DEC 25)`** 
+
+Hex: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`** 
+
+Assembly Code For JMP & ADD: **`(LDA 13 LDA 14 JMP 5 ORG 5 ADD STA 15 HLT ORG 13 DEC 51 DEC 25)`**
+
+Hex:  **`1D 2E 65 00 00 30 5F F0 00 00 00 00 00 33 19 00`** 
 
 ![Compiler](khalid_sap1_img/compiler.png)
 
