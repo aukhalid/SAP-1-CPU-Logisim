@@ -141,14 +141,16 @@ The following Boolean equations define when each control pin is activated (goes 
 - `sram_rd_final = (T2 AND cpu_mode) OR ((T5 AND isLDA) AND cpu_mode) OR ((T5 AND isLDB) AND cpu_mode AND (NOT l2))`
 - `ins_reg_in_en_final = T2 AND cpu_mode AND (NOT l2)`
 - `pc_en_final = T3 AND cpu_mode AND (NOT l2)`
-- `ins_reg_out_en_final = ((T4 AND isLDA) AND cpu_mode) OR ((T4 AND isLDB) AND cpu_mode) OR ((T4 AND isSTA) AND cpu_mode AND (NOT l2))`
+- `ins_reg_out_en_final = ((T4 AND isLDA) AND cpu_mode) OR ((T4 AND isLDB) AND cpu_mode) OR ((T4 AND isSTA) AND cpu_mode) OR (T3 AND isJMP)`
 - `a_in_final = ((T5 AND isLDA) AND cpu_mode) OR ((T4 AND isADD) AND cpu_mode AND (NOT l2))`
 - `a_out_final = ((T4 AND isADD) AND cpu_mode) OR ((T5 AND isSTA) AND cpu_mode AND (NOT l2))`
 - `b_in_final = (T5 AND isLDB) AND cpu_mode AND (NOT l2)`
 - `b_out_final = (T4 AND isADD) AND cpu_mode AND (NOT l2)`
 - `alu_out_final = (T4 AND isADD) AND cpu_mode AND (NOT l2)`
 - `sram_wr_final = ((T5 AND isSTA) AND (NOT l2)) OR (l2 AND debug)`
+- `alu_sub = (T4 AND isSUB) AND cpu_mode AND (NOT l2)`
 - `hlt = T4 AND isHLT AND (NOT l2)` *(Used to stop the clock/reset the state counter)*
+- `jmp_en = (T3 AND isJMP) AND cpu_mode AND (NOT l2)`
 
 <a id="control-manual"></a>
 ### Control Signals — Manual Mode (`khalid_sap1_manual.circ`)
