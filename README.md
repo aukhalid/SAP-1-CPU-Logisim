@@ -3,6 +3,7 @@
 ## Table of Contents
 Click on the `Table of Contents` below to directly go the contents
 - [Project Overview](#overview)
+- [Features](#features)
 - [Video Tutorials](#video-tutorials)
 - [Final Circuits](#final-circuits)
 - [Architecture Components](#architecture-components)
@@ -22,6 +23,25 @@ Click on the `Table of Contents` below to directly go the contents
 This repository contains the Logisim Evolution implementation of a Simple-As-Possible (SAP-1) CPU. The SAP-1 is a foundational computer architecture used to teach the basic principles of CPU design.
 
 This enhanced implementation features a fully functional hardwired control unit, which automates the fetch-decode-execute cycle. A key improvement is the addition of a ROM-based bootloader. This new feature allows machine code programs to be loaded into the CPU's RAM automatically, eliminating the tedious and error-prone process of manual data entry. The project culminates in successfully executing a simple addition program, loading two pre-defined 8-bit values, adding them, and storing the sum in memory.
+
+---
+
+<a id="features"></a>
+## Features
+
+- **Load Data from Memory:** Supports `LDA` and `LDB` instructions to load values into registers.  
+- **Arithmetic Operations:** Performs addition (`ADD`) and subtraction (`SUB`) between registers.  
+- **Store Results:** Stores the contents of Register A into memory using the `STA` instruction.  
+- **Control Flow:** Jumps to a specific memory address with the `JMP` instruction for loops and branching.  
+- **Program Execution:** Executes instructions sequentially using the Program Counter.  
+- **Instruction Handling:** Fetches, decodes, and executes instructions automatically via the Instruction Register and Control Logic.  
+- **Halt Execution:** Stops program execution with the `HLT` instruction.  
+- **Debugging Support:** Allows step-by-step manual control through dedicated pins in Logisim.  
+- **Memory Access:** Handles up to 16 memory addresses (4-bit address space).  
+- **Data Processing:** Processes 8-bit data values for arithmetic and storage operations.  
+- **ROM Program Storage:** Stores the instruction code in ROM for persistent programs.  
+- **Bootloader / Instruction Loader:** In debug mode, data can be loaded from ROM into RAM through a bootloader mechanism, enabling easy program initialization and testing.  
+
 
 ---
 
