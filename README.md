@@ -105,7 +105,7 @@ The SAP-1 CPU is composed of several fundamental building blocks:
 
   - **Control Unit — Auto Mode (overview)**
     
-    ![Main Control Unit](khalid_sap1_img/khalid_sap1_cs1.png)
+    ![Main Control Unit](khalid_sap1_img/khalid_sap1_csn_auto.png)
   
   - **Control Unit — Auto Mode (detail)**
     
