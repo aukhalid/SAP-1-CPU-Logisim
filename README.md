@@ -171,18 +171,14 @@ This program loads two 8-bit values (let's say 51 and 25), adds them, and stores
 | `00000010` | `0011 0000` | `30` | `ADD` (Add B to A, store in A. Operand bits are unused) |
 | `00000010` | `0100 0000` | `40` | `SUB` (Sub A to B, store in A. Operand bits are unused) |
 | `00000011` | `0101 1111` | `5F` | `STA 15` (Store content of Register A to memory address 15) |
-| `00000100` | `1111 0000` | `F0` | `HLT` (Halt program execution. Operand bits are unused) |
+| `00000100` | `0110 0101` | `65` | `STA 15` (Store content of Register A to memory address 15) |
+| `00000101` | `1111 0000` | `F0` | `HLT` (Halt program execution. Operand bits are unused) |
 
 ### Data Values in RAM
 | Address (Binary) | Data (Binary) | Decimal | Hex |
 |------------------|---------------|---------|-----|
 | `00001101` | `00110011` | 51 | `33` |
 | `00001110` | `00011001` | 25 | `19` |
-
-### Full HEX Code
-For ADD: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
-
-For SUB: **`1D 2E 40 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
 
 ---
 
@@ -192,6 +188,11 @@ For SUB: **`1D 2E 40 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
 Go to the link and write your SAP-1 assembly code and The assembler will convert it into a hex string for your Logisim ROM.
 
 **Compiler Link:** [sap1-compiler.vercel.app](https://sap1-compiler.vercel.app)
+
+Example HEX Code
+For ADD: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`**
+
+For JMP & ADD: **`1D 2E 65 00 00 30 5F F0 00 00 00 00 00 33 19 00`**
 
 ![Compiler](khalid_sap1_img/compiler.png)
 
