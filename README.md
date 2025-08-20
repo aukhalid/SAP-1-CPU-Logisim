@@ -40,7 +40,7 @@ I made videos explaining the SAP-1 CPU and how to simulate it.
 
 - **Auto Code Loading (`khalid_sap1_auto.circ`)**
   
-  ![Main Control Unit](khalid_sap1_img/khalid_sap1_auto1.png)
+  ![Main Control Unit](khalid_sap1_img/khalid_sap1_auto.png)
 
 - **Manual Code Loading (`khalid_sap1_manual.circ`)**
    
@@ -193,11 +193,11 @@ Go to the link and write your SAP-1 assembly code and The assembler will convert
 
 Assembly Code For ADD: **`(LDA 13 LDA 14 ADD STA 15 HLT ORG 13 DEC 51 DEC 25)`** 
 
-Hex: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`** 
+Hex Code: **`1D 2E 30 5F F0 00 00 00 00 00 00 00 00 33 19 00`** 
 
 Assembly Code For JMP & ADD: **`(LDA 13 LDA 14 JMP 5 ORG 5 ADD STA 15 HLT ORG 13 DEC 51 DEC 25)`**
 
-Hex:  **`1D 2E 65 00 00 30 5F F0 00 00 00 00 00 33 19 00`** 
+Hex Code: **`1D 2E 65 00 00 30 5F F0 00 00 00 00 00 33 19 00`** 
 
 ![Compiler](khalid_sap1_img/compiler.png)
 
@@ -267,7 +267,7 @@ Follow these steps to load your ROM-based program and run the automated simulati
 1. After the CPU executes the `HLT` instruction and stops, check the contents of RAM address `00001111` (decimal 15).  
 2. If you do ADD then It should contain `01001100` (decimal 76, Hex `4C`). Register A should also show `4C` on the 7-segment display.
    
-   ![Verify Result](khalid_sap1_img/khalid_sap1_auto2.png)
+   ![Verify Result](khalid_sap1_img/khalid_sap1_auto.png)
 
 ---
 
