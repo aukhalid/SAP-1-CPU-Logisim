@@ -1,5 +1,14 @@
 # SAP-1 CPU (Simple-As-Possible) — Logisim Evolution
 
+<p align="center">
+
+  <img src="https://img.shields.io/badge/SAP--1%20CPU-blue?style=for-the-badge&logo=circuit-board&logoColor=white" alt="SAP-1 CPU Badge">
+
+  <img src="https://img.shields.io/badge/Logisim-green?style=for-the-badge&logo=google-circles&logoColor=white" alt="Logisim Badge">
+
+</p>
+
+
 ## Table of Contents
 Click on the `Table of Contents` below to directly go the contents
 - [Project Overview](#overview)
