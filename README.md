@@ -345,6 +345,6 @@ Follow these steps to load your circuit, program the RAM, and run the automated 
 <a id="roadmap"></a>
 ## Future Improvements
 
-- **Expand Instruction Set:** Add more instructions like `SUB`, `OUT`, `JMP`, `JZ`, etc.  
+- **Expand Instruction Set:** Add more instructions like `OUT`, `JZ`, etc.
 - **Microprogrammed Control:** Replace the hardwired control unit with a microprogrammed one using a ROM for greater flexibility.  
 - **Input/Output:** Implement a simple input device (e.g., keyboard) and output display.
